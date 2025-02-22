@@ -21,7 +21,7 @@
         <mat-label>Select Difficulty</mat-label>
         <mat-select formControlName="difficulty">
           <mat-option *ngFor="let difficulty of difficulties" [value]="difficulty">
-            {{difficulty | titlecase}}
+            {{difficulty === 'any' ? 'Any Difficulty' : (difficulty | titlecase)}}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -30,7 +30,9 @@
         <mat-label>Select Type</mat-label>
         <mat-select formControlName="type">
           <mat-option *ngFor="let type of types" [value]="type">
-            {{type === 'multiple' ? 'Multiple Choice' : 'True/False'}}
+            {{type === 'any' ? 'Any Type' :
+            type === 'multiple' ? 'Multiple Choice' :
+            'True / False'}}
           </mat-option>
         </mat-select>
       </mat-form-field>

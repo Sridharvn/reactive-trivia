@@ -50,15 +50,15 @@ export class HomeComponent {
     { id: 32, name: 'Entertainment: Cartoon & Animations' },
   ];
 
-  difficulties = ['easy', 'medium', 'hard'];
-  types = ['multiple', 'boolean'];
+  difficulties = ['any', 'easy', 'medium', 'hard'];
+  types = ['any', 'multiple', 'boolean'];
 
   constructor(private fb: FormBuilder) {
     this.quizForm = this.fb.group({
       numberOfQuestions: [10],
-      category: ['any'], // Updated default value
-      difficulty: [''],
-      type: [''],
+      category: ['any'],
+      difficulty: ['any'],
+      type: ['any'], // Updated default value
     });
   }
 
