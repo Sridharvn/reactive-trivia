@@ -6,6 +6,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
+// https://opentdb.com/api.php?amount=10&category=10&difficulty=medium&type=multiple
+
 @Component({
   selector: 'app-home',
   standalone: true,
