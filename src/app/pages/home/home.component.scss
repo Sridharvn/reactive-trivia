@@ -39,3 +39,16 @@
     font-size: 1.1rem;
   }
 }
+
+::ng-deep {
+  .mat-mdc-select-panel {
+    background: white !important;
+  }
+
+  .mat-mdc-option {
+    background: white !important;
+    &:hover {
+      background: rgba(0, 0, 0, 0.04) !important;
+    }
+  }
+}
