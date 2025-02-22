@@ -1,1 +1,43 @@
-<p>home works!</p>
+<div class="quiz-setup-container">
+  <form [formGroup]="quizForm" (ngSubmit)="onSubmit()" class="quiz-form">
+    <h1>Trivia Quiz Setup</h1>
+
+    <div class="form-field-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Number of Questions</mat-label>
+        <input matInput type="number" formControlName="numberOfQuestions" min="1" max="50">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Select Category</mat-label>
+        <mat-select formControlName="category">
+          <mat-option *ngFor="let category of categories" [value]="category.id">
+            {{category.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Select Difficulty</mat-label>
+        <mat-select formControlName="difficulty">
+          <mat-option *ngFor="let difficulty of difficulties" [value]="difficulty">
+            {{difficulty | titlecase}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Select Type</mat-label>
+        <mat-select formControlName="type">
+          <mat-option *ngFor="let type of types" [value]="type">
+            {{type === 'multiple' ? 'Multiple Choice' : 'True/False'}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="primary" class="submit-button" type="submit">
+      Start Quiz
+    </button>
+  </form>
+</div>
