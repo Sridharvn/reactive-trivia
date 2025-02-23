@@ -10,9 +10,9 @@ import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { QuizReducer } from './store/quiz/quiz.reducer';
 import { QuizEffects } from './store/quiz/quiz.effects';
 import { provideHttpClient } from '@angular/common/http';
+import { QuizReducer } from './store/quiz/quiz.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
