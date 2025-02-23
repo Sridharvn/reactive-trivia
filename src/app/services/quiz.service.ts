@@ -12,9 +12,10 @@ export class QuizService {
   constructor(private api: ApiService) {}
 
   getQuestions(params: QuizParams): Observable<any> {
-    debugger;
     // https://opentdb.com/api.php?amount=10&category=10&difficulty=medium&type=multiple
-    const url = `?amount=${params.amount}&category=${params.category}&difficulty=${params.difficulty}&type=${params.type}`;
+    const url = `?amount=${params.amount ?? ''}&category=${
+      params.category ?? ''
+    }&difficulty=${params.difficulty ?? ''}&type=${params.type ?? ''}`;
     return this.api.get('quiz', url);
   }
 }
