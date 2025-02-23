@@ -27,7 +27,7 @@ export class ApiService {
     params?: HttpParams
   ): Observable<T> {
     const url = `${this.getBaseUrl(apiType)}${endpoint}`;
-    return this.http.get<T>(url, { params, headers: this.headers });
+    return this.http.get<T>(url, { params });
   }
 
   post<T>(
@@ -36,7 +36,7 @@ export class ApiService {
     body: any
   ): Observable<T> {
     const url = `${this.getBaseUrl(apiType)}${endpoint}`;
-    return this.http.post<T>(url, body, { headers: this.headers });
+    return this.http.post<T>(url, body);
   }
 
   put<T>(
@@ -45,11 +45,11 @@ export class ApiService {
     body: any
   ): Observable<T> {
     const url = `${this.getBaseUrl(apiType)}${endpoint}`;
-    return this.http.put<T>(url, body, { headers: this.headers });
+    return this.http.put<T>(url, body);
   }
 
   delete<T>(apiType: 'quiz' | 'users', endpoint: string): Observable<T> {
     const url = `${this.getBaseUrl(apiType)}${endpoint}`;
-    return this.http.delete<T>(url, { headers: this.headers });
+    return this.http.delete<T>(url);
   }
 }
