@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap, pipe } from 'rxjs';
 import * as QuizActions from './quiz.actions';
@@ -6,7 +6,9 @@ import { QuizService } from '../../services/quiz.service';
 
 @Injectable()
 export class QuizEffects {
-  constructor(private actions$: Actions, private quizService: QuizService) {}
+  constructor() {}
+  actions$ = inject(Actions);
+  quizService = inject(QuizService);
 
   loadQuestions$ = createEffect(() => {
     return this.actions$.pipe(
