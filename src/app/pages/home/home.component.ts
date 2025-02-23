@@ -15,8 +15,6 @@ import {
 } from '../../models/quiz-params.model';
 import { Questions } from '../../models/question.model';
 
-// https://opentdb.com/api.php?amount=10&category=10&difficulty=medium&type=multiple
-
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -114,7 +112,6 @@ export class HomeComponent {
       };
 
       this.store.dispatch(QuizActions.loadQuestions({ params }));
-      debugger;
     }
   }
 }

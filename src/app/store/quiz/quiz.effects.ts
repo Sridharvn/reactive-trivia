@@ -11,7 +11,7 @@ export class QuizEffects {
     this.actions$.pipe(
       ofType(QuizActions.loadQuestions),
       switchMap((action) =>
-        this.quizService.getQuestions(action.questions).pipe(
+        this.quizService.getQuestions(action.params).pipe(
           map((response) =>
             QuizActions.loadQuestionsSuccess({ questions: response.results })
           ),
