@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { catchError, map, of, pipe, switchMap } from 'rxjs';
+
 import * as QuizActions from './quiz.actions';
 import { QuizService } from '../../services/quiz.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class QuizEffects {
   loadQuestions$ = createEffect(() =>
     this.actions$.pipe(
