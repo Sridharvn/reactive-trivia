@@ -5,6 +5,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { Store } from '@ngrx/store';
+import * as QuizActions from './../../store/quiz/quiz.actions';
+import { Questions } from '../../models/question.model';
 
 // https://opentdb.com/api.php?amount=10&category=10&difficulty=medium&type=multiple
 
@@ -24,6 +27,7 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class HomeComponent {
   quizForm: FormGroup;
+  questions: Questions[] = [];
   categories = [
     { id: 'any', name: 'Any Category' },
     { id: 9, name: 'General Knowledge' },
@@ -55,7 +59,7 @@ export class HomeComponent {
   difficulties = ['any', 'easy', 'medium', 'hard'];
   types = ['any', 'multiple', 'boolean'];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private store: Store) {
     this.quizForm = this.fb.group({
       numberOfQuestions: [10],
       category: ['any'],
@@ -67,6 +71,26 @@ export class HomeComponent {
   onSubmit() {
     if (this.quizForm.valid) {
       console.log(this.quizForm.value);
+      const params = {
+        amount: this.quizForm.value.numberOfQuestions,
+        category:
+          this.quizForm.value.category !== 'any'
+            ? this.quizForm.value.category
+            : undefined,
+        difficulty:
+          this.quizForm.value.difficulty !== 'any'
+            ? this.quizForm.value.difficulty
+            : undefined,
+        type:
+          this.quizForm.value.type !== 'any'
+            ? this.quizForm.value.type
+            : undefined,
+      };
+
+      this.store.dispatch(
+        QuizActions.loadQuestions({ questions: this.questions })
+      );
+      debugger;
     }
   }
 }
