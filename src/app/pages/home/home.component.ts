@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Type } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -7,6 +7,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { Store } from '@ngrx/store';
 import * as QuizActions from './../../store/quiz/quiz.actions';
+import {
+  Category,
+  Difficulty,
+  QuizParams,
+  QuizType,
+} from '../../models/quiz-params.model';
 import { Questions } from '../../models/question.model';
 
 // https://opentdb.com/api.php?amount=10&category=10&difficulty=medium&type=multiple
@@ -29,35 +35,55 @@ export class HomeComponent {
   quizForm: FormGroup;
   questions: Questions[] = [];
   categories = [
-    { id: 'any', name: 'Any Category' },
-    { id: 9, name: 'General Knowledge' },
-    { id: 10, name: 'Entertainment: Books' },
-    { id: 11, name: 'Entertainment: Film' },
-    { id: 12, name: 'Entertainment: Music' },
-    { id: 13, name: 'Entertainment: Musicals & Theatres' },
-    { id: 14, name: 'Entertainment: Television' },
-    { id: 15, name: 'Entertainment: Video Games' },
-    { id: 16, name: 'Entertainment: Board Games' },
-    { id: 17, name: 'Science & Nature' },
-    { id: 18, name: 'Science: Computers' },
-    { id: 19, name: 'Science: Mathematics' },
-    { id: 20, name: 'Mythology' },
-    { id: 21, name: 'Sports' },
-    { id: 22, name: 'Geography' },
-    { id: 23, name: 'History' },
-    { id: 24, name: 'Politics' },
-    { id: 25, name: 'Art' },
-    { id: 26, name: 'Celebrities' },
-    { id: 27, name: 'Animals' },
-    { id: 28, name: 'Vehicles' },
-    { id: 29, name: 'Entertainment: Comics' },
-    { id: 30, name: 'Science: Gadgets' },
-    { id: 31, name: 'Entertainment: Japanese Anime & Manga' },
-    { id: 32, name: 'Entertainment: Cartoon & Animations' },
+    { id: Category.Any, name: 'Any Category' },
+    { id: Category.GeneralKnowledge, name: 'General Knowledge' },
+    { id: Category.EntertainmentBooks, name: 'Entertainment: Books' },
+    { id: Category.EntertainmentFilm, name: 'Entertainment: Film' },
+    { id: Category.EntertainmentMusic, name: 'Entertainment: Music' },
+    {
+      id: Category.EntertainmentMusicalsTheatres,
+      name: 'Entertainment: Musicals & Theatres',
+    },
+    { id: Category.EntertainmentTelevision, name: 'Entertainment: Television' },
+    {
+      id: Category.EntertainmentVideoGames,
+      name: 'Entertainment: Video Games',
+    },
+    {
+      id: Category.EntertainmentBoardGames,
+      name: 'Entertainment: Board Games',
+    },
+    { id: Category.ScienceNature, name: 'Science & Nature' },
+    { id: Category.ScienceComputers, name: 'Science: Computers' },
+    { id: Category.ScienceMathematics, name: 'Science: Mathematics' },
+    { id: Category.Mythology, name: 'Mythology' },
+    { id: Category.Sports, name: 'Sports' },
+    { id: Category.Geography, name: 'Geography' },
+    { id: Category.History, name: 'History' },
+    { id: Category.Politics, name: 'Politics' },
+    { id: Category.Art, name: 'Art' },
+    { id: Category.Celebrities, name: 'Celebrities' },
+    { id: Category.Animals, name: 'Animals' },
+    { id: Category.Vehicles, name: 'Vehicles' },
+    { id: Category.EntertainmentComics, name: 'Entertainment: Comics' },
+    { id: Category.ScienceGadgets, name: 'Science: Gadgets' },
+    {
+      id: Category.EntertainmentJapaneseAnimeManga,
+      name: 'Entertainment: Japanese Anime & Manga',
+    },
+    {
+      id: Category.EntertainmentCartoonAnimations,
+      name: 'Entertainment: Cartoon & Animations',
+    },
   ];
 
-  difficulties = ['any', 'easy', 'medium', 'hard'];
-  types = ['any', 'multiple', 'boolean'];
+  difficulties = [
+    Difficulty.Any,
+    Difficulty.Easy,
+    Difficulty.Medium,
+    Difficulty.Hard,
+  ];
+  types = [QuizType.Any, QuizType.Multiple, QuizType.Boolean];
 
   constructor(private fb: FormBuilder, private store: Store) {
     this.quizForm = this.fb.group({
@@ -71,7 +97,7 @@ export class HomeComponent {
   onSubmit() {
     if (this.quizForm.valid) {
       console.log(this.quizForm.value);
-      const params = {
+      const params: QuizParams = {
         amount: this.quizForm.value.numberOfQuestions,
         category:
           this.quizForm.value.category !== 'any'
@@ -87,9 +113,7 @@ export class HomeComponent {
             : undefined,
       };
 
-      this.store.dispatch(
-        QuizActions.loadQuestions({ questions: this.questions })
-      );
+      this.store.dispatch(QuizActions.loadQuestions({ params }));
       debugger;
     }
   }

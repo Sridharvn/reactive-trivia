@@ -3,7 +3,7 @@ import { Questions } from '../../models/question.model';
 
 export const loadQuestions = createAction(
   '[Quiz] Load Questions',
-  props<{ questions: Questions[] }>()
+  props<{ params: any }>()
 );
 
 export const loadQuestionsSuccess = createAction(

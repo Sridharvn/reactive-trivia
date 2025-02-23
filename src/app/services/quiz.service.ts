@@ -11,6 +11,7 @@ export class QuizService {
   constructor(private api: ApiService) {}
 
   getQuestions(params: any): Observable<any> {
+    debugger;
     const url = '';
     return this.api.get('quiz', url, params);
   }
