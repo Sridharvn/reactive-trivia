@@ -11,7 +11,7 @@ export class QuizService {
   constructor(private api: ApiService) {}
 
   getQuestions(params: any): Observable<any> {
-    const url = 'https://opentdb.com/api.php';
+    const url = '';
     return this.api.get('quiz', url, params);
   }
 }

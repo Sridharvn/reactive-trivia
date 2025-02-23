@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
   private readonly baseUrls = {
-    quiz: 'https://opentdb.com',
+    quiz: 'https://opentdb.com/api.php',
     users: 'https://jsonplaceholder.typicode.com',
   };
 
