@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { catchError, map, of, switchMap, pipe } from 'rxjs';
 import * as QuizActions from './quiz.actions';
 import { QuizService } from '../../services/quiz.service';
 
